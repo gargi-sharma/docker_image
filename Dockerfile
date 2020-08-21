@@ -10,4 +10,4 @@ EXPOSE 8080
 COPY gradle-hello-world-0.1.0.jar /opt/app.jar
 ADD https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.9.0/elastic-apm-agent-1.9.0.jar /opt/apm-agent.jar
 WORKDIR /opt
-CMD ["java", "-Dserver.port=${PORT}", "-XshowSettings:vm", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC", "-jar", "app.jar"]
+CMD ["java", "-javaagent:/opt/apm-agent.jar", "-Dserver.port=${PORT}", "-XshowSettings:vm", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC", "-jar", "app.jar"]
